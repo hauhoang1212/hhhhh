@@ -1,0 +1,327 @@
+footer{
+    background-color: #ada29d;
+    color: rgb(26, 21, 41);
+    text-align: center;
+    
+}
+#header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 60px;
+    background: #9B4512;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Đảm bảo header có ưu tiên cao hơn */
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%; /* Đảm bảo header chiếm toàn bộ chiều rộng của màn hình */
+    box-sizing: border-box; /* Đảm bảo không bị tràn lề khi padding */
+    background-color: #9B4512; /* Đảm bảo màu nền luôn hiển thị */
+    overflow: hidden; /* Tránh phần tử nào đó làm chèn header */
+}
+
+#navbar {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Khoảng cách giữa các mục trong navbar */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#navbar li {
+    display: flex;
+    align-items: center;
+}
+
+#navbar a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#navbar a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffd700;
+}
+#navbar form {
+    display: flex;
+    align-items: center;
+}
+
+#navbar input[type="text"] {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+#navbar button {
+    padding: 5px 10px;
+    margin-left: 5px;
+    border: none;
+    background-color: #ffd700;
+    color: #333;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#navbar button:hover {
+    background-color: #ffcc00;
+}
+   
+
+
+
+    /*  footer */
+    
+    .footer {
+        background-color: #f9f9f9;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+    
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .footer-column {
+        flex: 1;
+        max-width: 350px;
+        line-height: 35px;
+    }
+    
+    .footer-column h3 {
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    
+    .footer-column p {
+        margin: 5px 0;
+    }
+    
+    .footer-column i {
+        margin-right: 5px;
+    }
+    
+    .footer img.logo {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+    
+    
+    .social-icons {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .social-icons i {
+        font-size: 20px;
+        color: #333;
+        cursor: pointer;
+    }
+    
+    .social-icons i:hover {
+        color: #555;
+    }
+    
+    
+    .footer-dmca {
+        text-align: center;
+        padding: 10px;
+    }
+    
+    .footer-dmca img {
+        width: 100px;
+    }
+
+
+
+    #page-header {
+        background-image: url('img/home/img2.png'); /* Đường dẫn đến ảnh nền */
+        background-size: cover; /* Ảnh nền phủ kín phần header */
+        background-position: center; /* Căn giữa ảnh nền */
+        background-repeat: no-repeat;
+        padding: 50px 0;
+        text-align: center;
+        color: #fff; /* Chữ màu trắng cho nổi bật trên ảnh nền */
+    }
+    
+    #page-header h2 {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Tạo bóng chữ để dễ đọc hơn trên nền */
+    }
+    
+    #page-header p {
+        font-size: 18px;
+        margin-top: 0;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Bóng chữ nhẹ cho câu mô tả */
+    }
+    /* trang login */
+      /* Font */
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+      * {
+          font-family: 'Poppins', sans-serif;
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+      /* Background */
+      body {
+          background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("images/1.jpg");
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-attachment: fixed;
+          color: #ffffff;
+      }
+      .box {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+      }
+      .container {
+          background: rgba(255, 255, 255, 0.15);
+          border-radius: 15px;
+          padding: 20px 30px;
+          max-width: 400px;
+          width: 100%;
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      }
+      /* Header */
+      .top-header span {
+          color: #ffb3b3;
+          font-size: small;
+          display: flex;
+          justify-content: center;
+          padding: 10px 0;
+      }
+      header {
+          color: #ffffff;
+          font-size: 30px;
+          font-weight: 600;
+          display: flex;
+          justify-content: center;
+          padding-bottom: 20px;
+      }
+      .input-field {
+          position: relative;
+          margin-bottom: 20px;
+      }
+      .input-field .input {
+          height: 50px;
+          width: 100%;
+          padding: 0 15px 0 45px;
+          background: rgba(255, 255, 255, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          border-radius: 30px;
+          color: #ffffff;
+          outline: none;
+          font-size: 1rem;
+          transition: background 0.3s ease;
+      }
+      .input-field .input:focus {
+          background: rgba(255, 255, 255, 0.3);
+          border-color: #ffffff;
+      }
+      .input-field i {
+          position: absolute;
+          top: 50%;
+          left: 15px;
+          transform: translateY(-50%);
+          color: #ffffff;
+          font-size: 1.2rem;
+      }
+      ::placeholder {
+          color: #d4d4d4;
+      }
+      /* Button */
+      .submit {
+          height: 50px;
+          width: 100%;
+          background-color: #ff6b6b;
+          border: none;
+          border-radius: 30px;
+          color: #ffffff;
+          font-size: 1rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: background 0.3s ease, box-shadow 0.3s ease;
+      }
+      .submit:hover {
+          background-color: #e63946;
+          box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+        }
+      .bottom {
+          display: flex;
+          justify-content: space-between;
+          font-size: small;
+          color: #ffffff;
+          margin-top: 10px;
+      }
+      .bottom label a {
+          color: #ffb3b3;
+          text-decoration: none;
+      }
+      .bottom label a:hover {
+          color: #ff6b6b;
+          text-decoration: underline;
+      }
+      /* chỉnh từ đây */
+      #navbar {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    #navbar li {
+        position: relative;
+    }
+    
+    #navbar a {
+        text-decoration: none;
+        padding: 10px 15px;
+        display: block;
+        color: #333;
+    }
+    /* điều chỉnh hiển thị tên người đăng nhập */
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 50%; /* Xuất hiện bên dưới mục "Đăng xuất" */
+        left: -50px;
+        padding: 5px ;
+        z-index: 1000;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+    
+    .dropdown-menu li a {
+        white-space: nowrap;
+        padding: 5px 10px;
+        color: #555;
+        font-size: 8px; /* Thu nhỏ kích thước chữ */
+    }
+    
+    .dropdown-menu li a:hover {
+        background-color: #eee;
+    }
+   
