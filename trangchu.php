@@ -30,10 +30,104 @@ session_start();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <title>Cửa hàng</title>
-    <!--Start of Fchat.vn--><script type="text/javascript" src="https://cdn.fchat.vn/assets/embed/webchat.js?id=673315cb32a0a945b5187b78" async="async"></script><!--End of Fchat.vn-->
+    <!--Start of Fchat.vn-->
+    <!-- <script type="text/javascript" src="https://cdn.fchat.vn/assets/embed/webchat.js?id=673315cb32a0a945b5187b78" async="async"></script>End of Fchat.vn -->
+    <script>
+       async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            const chatContent = document.getElementById('chat-content');
+
+            if (message === '') return;
+
+            // Hiển thị tin nhắn người dùng
+            chatContent.innerHTML += `
+                <div style="text-align: right; margin-bottom: 10px;">
+                    <span style="background-color: #0078FF; color: white; padding: 5px 10px; border-radius: 10px;">${message}</span>
+                </div>
+            `;
+            input.value = '';
+            chatContent.scrollTop = chatContent.scrollHeight;
+
+            // Gửi yêu cầu tới chatbot.php
+            try {
+                const response = await fetch('chatbot.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `query=${encodeURIComponent(message)}`
+                });
+
+                const result = await response.json();
+
+                // Hiển thị phản hồi từ chatbot
+                if (result.status === 'success') {
+                    chatContent.innerHTML += result.data.map(product => `
+                        <div style="text-align: left; margin-bottom: 10px;">
+                            <div style="background-color: #f1f1f1; padding: 10px; border-radius: 10px; ">
+                                <h4 style="margin-bottom: 5px; color: #0078FF;">${product.name}</h4>
+                                <p style="margin: 0; color: green;">Giá: ${Math.round(product.price).toLocaleString('vi-VN')} VND</p>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    chatContent.innerHTML += `
+                        <div style="text-align: left; margin-bottom: 10px;">
+                            <span style="background-color: #f1f1f1; color: red; padding: 5px 10px; border-radius: 10px; line-height: 1.8; margin: 10px 0;">${result.message}</span>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                chatContent.innerHTML += `
+                    <div style="text-align: left; margin-bottom: 10px;">
+                        <span style="background-color: #f1f1f1; color: red; padding: 5px 10px; border-radius: 10px;">Đã xảy ra lỗi, vui lòng thử lại!</span>
+                    </div>
+                `;
+            }
+
+            chatContent.scrollTop = chatContent.scrollHeight; // Cuộn xuống dưới cùng
+        }
+        function toggleChat() {
+            const chatBox = document.getElementById('chat-box');
+            const chatButton = document.getElementById('chat-button');
+
+            if (chatBox.style.display === 'block') {
+                chatBox.style.display = 'none';
+                chatButton.style.display = 'flex'; // Hiển thị lại nút chat icon
+            } else {
+                chatBox.style.display = 'block';
+                chatButton.style.display = 'none'; // Ẩn nút chat icon khi chat box hiện
+            }
+        }
+
+        function handleEnter(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+    </script>
 </head> 
 <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
 <body>
+<div id="chat-widget">
+    <div id="chat-button" onclick="toggleChat()">
+        <i class="fas fa-comment"></i>
+    </div>
+    <div id="chat-box" style="display: none;">
+        <div id="chat-header">
+            <h3>Chat</h3>
+            <button onclick="toggleChat()">✖</button>
+        </div>
+        <div style="height: 300px; overflow-y: scroll; padding: 5px;">
+            <div id="chat-content"></div>
+        </div>
+        <div id="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Nhập tin nhắn..." onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()">Gửi</button>
+        </div>
+    </div>
+</div>
 <section id="header">
         <a href="#"><img src="img/home/logo.png" class="logo" alt="Logo"></a>
         <div>
@@ -629,6 +723,95 @@ aside a:hover {
 
 .carousel-controls button:hover {
     color: #000;
+}
+#chat-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+#chat-header {
+    background-color: #0078FF;
+    color: white;
+    padding: 10px;
+    display: flex;
+    border-radius: 10px 10px 0 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#chat-box {
+    width: 350px;
+    height: 400px; /* Chiều cao cố định của hộp chat */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+#chat-content {
+    display: flex;
+    flex-direction: column; /* Đảm bảo nội dung hiển thị theo thứ tự bình thường */
+    justify-content: flex-end; /* Đẩy nội dung xuống đáy */
+    padding: 10px;
+    overflow-y: auto; /* Cuộn dọc nếu nội dung vượt quá chiều cao */
+     /* Đảm bảo khung chat sử dụng toàn bộ chiều cao */
+    box-sizing: border-box; /* Đảm bảo padding không làm tràn phần tử */
+}
+#chat-input-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    padding: 10px;
+    border-radius: 0 0 10px 10px ;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+}
+
+#chat-input {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+#chat-input:focus {
+    outline: none;
+    border-color: #0078FF;
+}
+
+button {
+    background-color: #0078FF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #005BB5;
+}
+#chat-button {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #0078FF;
+    color: white;
+    font-size: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 </style>
